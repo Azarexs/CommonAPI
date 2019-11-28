@@ -1,11 +1,8 @@
 package me.azarex.commonapi.configuration.impl;
 
 import me.azarex.commonapi.configuration.Configuration;
-import me.azarex.commonapi.utility.FileUtility;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.YamlConfiguration;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.function.DoubleSupplier;
 import java.util.function.IntSupplier;

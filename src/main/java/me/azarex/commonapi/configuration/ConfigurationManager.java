@@ -1,8 +1,11 @@
 package me.azarex.commonapi.configuration;
 
 import me.azarex.commonapi.configuration.impl.SectionConfiguration;
+import me.azarex.commonapi.configuration.impl.SimpleConfiguration;
 
+import java.io.File;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +33,10 @@ public class ConfigurationManager<T> {
     public void register(T key, Configuration configuration) {
         if (configuration instanceof SectionConfiguration) return;
         configurations.put(key, configuration);
+    }
+
+    public void registerSimpleConfiguration(T key, String fileName) {
+        configurations.put(key, new SimpleConfiguration(Paths.get(dataFolder + File.separator + fileName)));
     }
 
     public Configuration get(T key) {

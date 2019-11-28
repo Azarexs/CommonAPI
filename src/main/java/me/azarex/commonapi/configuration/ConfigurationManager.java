@@ -1,5 +1,7 @@
 package me.azarex.commonapi.configuration;
 
+import me.azarex.commonapi.configuration.impl.SectionConfiguration;
+
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,14 +16,19 @@ public class ConfigurationManager<T> {
     }
 
     public void saveAll() {
-        configurations.values().forEach(Configuration::save);
+        configurations.values().stream()
+                .filter(configuration -> !(configuration instanceof SectionConfiguration))
+                .forEach(Configuration::save);
     }
 
     public void reloadAll() {
-        configurations.values().forEach(Configuration::reload);
+        configurations.values().stream()
+                .filter(configuration -> !(configuration instanceof SectionConfiguration))
+                .forEach(Configuration::reload);
     }
 
     public void register(T key, Configuration configuration) {
+        if (configuration instanceof SectionConfiguration) return;
         configurations.put(key, configuration);
     }
 

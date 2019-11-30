@@ -30,13 +30,13 @@ public class ConfigurationManager<T> {
                 .forEach(Configuration::reload);
     }
 
-    public void register(T key, Configuration configuration) {
-        if (configuration instanceof SectionConfiguration) return;
-        configurations.put(key, configuration);
+    public Configuration register(T key, Configuration configuration) {
+        if (configuration instanceof SectionConfiguration) return configuration;
+        return configurations.put(key, configuration);
     }
 
-    public void registerSimpleConfiguration(T key, String fileName) {
-        configurations.put(key, new SimpleConfiguration(Paths.get(dataFolder + File.separator + fileName)));
+    public Configuration registerSimpleConfiguration(T key, String fileName) {
+        return configurations.put(key, new SimpleConfiguration(Paths.get(dataFolder + File.separator + fileName)));
     }
 
     public Configuration get(T key) {
